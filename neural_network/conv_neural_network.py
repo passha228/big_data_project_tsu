@@ -5,8 +5,14 @@ from keras.layers import Conv2D, Dense, Flatten, MaxPooling2D, Dropout
 from keras.models import Sequential
 
 class ConvNeuralNetwork(NeuralNetwork):
-    #TODO не помню что такое input_shape
     def buildModel(self, inputSize, outputSize):
+        """
+        Метод, который совершает сборку модели
+        
+        inputSize: входной размер изображения, представить в виде одномерного массива numpy
+        outputSize: кол-во классов изображений
+        """
+        
         super().buildModel(inputSize)
         self.model.add(Conv2D(64, (3, 3), padding='same', 
                         input_shape=(224, 224, 3), activation='relu'))

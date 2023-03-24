@@ -6,6 +6,7 @@ class Perseptron(NeuralNetwork):
     def buildModel(self, inputSize, outputSize):
         """
         Метод, который совершает сборку модели
+        
         inputSize: входной размер изображения, представить в виде одномерного массива numpy
         outputSize: кол-во классов изображений
         """
