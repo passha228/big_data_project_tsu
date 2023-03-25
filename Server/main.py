@@ -43,7 +43,7 @@ def upload_file():
             # безопасно извлекаем оригинальное имя файла
             filename = secure_filename(file.filename)
             # сохраняем файл
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], 'files'))
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], 'files', filename))
             # если все прошло успешно, то перенаправляем  
             # на функцию-представление `download_file` 
             # для скачивания файла
