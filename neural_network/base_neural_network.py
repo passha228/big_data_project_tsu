@@ -20,15 +20,6 @@ class NeuralNetwork:
         self.loss = loss
         self.epochs = epochs
 
-    def buildModel(self, inputSize, outputSize):
-        """
-        Собрать модель
-
-        inputSize: размер изображения в 1-мерной развертке
-        outputSize: кол-во классов
-        """
-        self.model = Sequential()
-
     def compileModel(self, train_dataset, validation_dataset):
         """
         Обучение модели
@@ -37,7 +28,7 @@ class NeuralNetwork:
         validation_datset: датасет для проверки
         """
         self.model.compile(optimizer=self.optimizer, loss=self.loss, metrics=['accuracy'])
-        self.model.fit(train_dataset, epochs=self.epochs, validation_data=validation_dataset)
+        self.model.fit(train_dataset, validation_dataset, epochs=self.epochs)
 
     def saveModelTo(self, path):
         """

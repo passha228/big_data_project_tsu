@@ -1,6 +1,7 @@
 from base_neural_network import NeuralNetwork
 
-from keras.layers import Dense
+from keras.layers import Dense, Flatten
+from keras import Model
 
 class Perseptron(NeuralNetwork):
     def buildModel(self, inputSize, outputSize):
@@ -11,9 +12,11 @@ class Perseptron(NeuralNetwork):
         outputSize: кол-во классов изображений
         """
         super().buildModel(inputSize, outputSize)
-        self.model.add(Dense(inputSize, activation='relu'))
-        self.model.add(Dense(int(inputSize / 2), activation='relu'))
-        self.model.add(Dense(int(inputSize / 4), activation='relu'))
-        self.model.add(Dense(int(inputSize / 8), activation='relu'))
+        # self.model.add(Flatten(input_shape = inputSize))
+        x = Dense(256, activation='relu')(self.inputs)
+        Dense(128, activation='relu')(x)
+        Dense(64, activation='relu')(x)
+        Dense(32, activation='relu')(x)
 
-        self.model.add(Dense(outputSize, activation='softmax'))
+        Dense(outputSize, activation='softmax')(x)
+        self.model = Model(self.inputs, x)

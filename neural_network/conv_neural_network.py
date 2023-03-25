@@ -1,28 +1,35 @@
 from base_neural_network import NeuralNetwork
 
 import tensorflow as tf
-from keras.layers import Conv2D, Dense, Flatten, MaxPooling2D, Dropout
-from keras.models import Sequential
+from tensorflow import keras
+from keras.layers import Conv2D, MaxPooling2D, add, GlobalAveragePooling2D, Dropout, Dense
 
 class ConvNeuralNetwork(NeuralNetwork):
-    def buildModel(self, inputSize, outputSize):
+    def buildModel(self, inputShape, outputSize):
         """
         Метод, который совершает сборку модели
         
-        inputSize: входной размер изображения, представить в виде одномерного массива numpy
+        inputShape: входной размер изображения, представить в виде одномерного массива numpy
         outputSize: кол-во классов изображений
         """
         
-        super().buildModel(inputSize)
-        self.model.add(Conv2D(64, (3, 3), padding='same', 
-                        input_shape=(224, 224, 3), activation='relu'))
-        self.model.add(MaxPooling2D(pool_size=(2, 2)))
-        self.model.add(Conv2D(128, (3, 3), activation='relu', padding='same'))
-        self.model.add(MaxPooling2D(pool_size=(2, 2)))        
-        self.model.add(Conv2D(256, (3, 3), activation='relu', padding='same'))
-        self.model.add(MaxPooling2D(pool_size=(2, 2)))
+        inputs = keras.Input(shape=inputShape, name="img")
+        x = Conv2D(32, 3, activation="relu")(inputs)
+        x = Conv2D(64, 3, activation="relu")(x)
+        block_1_output = MaxPooling2D(3)(x)
 
-        self.model.add(Flatten())
-        self.model.add(Dense(256, activation='relu'))
-        self.model.add(Dense(128, activation='relu'))
-        self.model.add(Dense(outputSize, activation='softmax'))
+        x = Conv2D(64, 3, activation="relu", padding="same")(block_1_output)
+        x = Conv2D(64, 3, activation="relu", padding="same")(x)
+        block_2_output = add([x, block_1_output])
+
+        x = Conv2D(64, 3, activation="relu", padding="same")(block_2_output)
+        x = Conv2D(64, 3, activation="relu", padding="same")(x)
+        block_3_output = add([x, block_2_output])
+
+        x = Conv2D(64, 3, activation="relu")(block_3_output)
+        x = GlobalAveragePooling2D()(x)
+        x = Dense(256, activation="relu")(x)
+        x = Dropout(0.5)(x)
+        outputs = Dense(outputSize)(x)
+
+        model = keras.Model(inputs, outputs)
