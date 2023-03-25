@@ -10,7 +10,7 @@ class Perseptron(NeuralNetwork):
         inputSize: входной размер изображения, представить в виде одномерного массива numpy
         outputSize: кол-во классов изображений
         """
-        super().buildModel(inputSize)
+        super().buildModel(inputSize, outputSize)
         self.model.add(Dense(inputSize, activation='relu'))
         self.model.add(Dense(int(inputSize / 2), activation='relu'))
         self.model.add(Dense(int(inputSize / 4), activation='relu'))
