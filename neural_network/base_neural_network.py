@@ -3,11 +3,7 @@ from keras.models import Sequential, load_model
 
 
 class NeuralNetwork:
-    optimizer = None
-    loss = None
-    epochs = 0
-
-    def __init__(self, optimizer, loss, epochs):
+    def __init__(self, optimizer = None, loss = None, epochs = 0):
         """
         Конструктор
 

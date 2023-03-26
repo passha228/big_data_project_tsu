@@ -29,7 +29,6 @@ class ConvNeuralNetwork(NeuralNetwork):
         x = Conv2D(64, 3, activation="relu")(block_3_output)
         x = GlobalAveragePooling2D()(x)
         x = Dense(256, activation="relu")(x)
-        x = Dropout(0.5)(x)
         outputs = Dense(outputSize)(x)
 
         self.model = keras.Model(inputs, outputs)
