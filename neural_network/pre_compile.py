@@ -1,17 +1,12 @@
 import pandas as pd
 import numpy as np
-import cv2
+
 import os
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras.datasets import cifar10
-<<<<<<< Updated upstream
-
 from conv_neural_network import ConvNeuralNetwork
-=======
-import perseptron
 from keras import optimizers
->>>>>>> Stashed changes
 
 def func():
     (x_train,y_train), (x_test,y_test) = cifar10.load_data()
@@ -27,5 +22,6 @@ def func():
     p.buildModel((32, 32, 3), 10)
     p.compileModel(x_train, y_train)
     print(p.validate(x_test,y_test))
+    p.saveModelTo("./conv.h5")
     
 func()

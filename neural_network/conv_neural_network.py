@@ -32,4 +32,4 @@ class ConvNeuralNetwork(NeuralNetwork):
         x = Dropout(0.5)(x)
         outputs = Dense(outputSize)(x)
 
-        model = keras.Model(inputs, outputs)
+        self.model = keras.Model(inputs, outputs)
