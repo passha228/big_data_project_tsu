@@ -16,7 +16,7 @@ class NeuralNetwork:
         self.loss = loss
         self.epochs = epochs
 
-    def compileModel(self, train_dataset, validation_dataset):
+    def compileModel(self, x_train, y_train):
         """
         Обучение модели
 
@@ -24,7 +24,7 @@ class NeuralNetwork:
         validation_datset: датасет для проверки
         """
         self.model.compile(optimizer=self.optimizer, loss=self.loss, metrics=['accuracy'])
-        return self.model.fit(train_dataset, validation_dataset, epochs=self.epochs)
+        return self.model.fit(x_train, y_train, epochs=self.epochs)
 
     def saveModelTo(self, path):
         """

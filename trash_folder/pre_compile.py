@@ -1,4 +1,3 @@
-import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import cv2
@@ -10,9 +9,11 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras.datasets import cifar10
 from conv_neural_network import ConvNeuralNetwork
+from perseptron import Perseptron
+from conv_neural_network import ConvNeuralNetwork
 from keras import optimizers
 
-def func():
+def train_save_conv():
     (x_train,y_train), (x_test,y_test) = cifar10.load_data()
     x_train = x_train / 255
     x_test = x_test / 255
@@ -25,10 +26,10 @@ def func():
     p.compileModel(x_train, y_train)
     
 
-    p.saveModelTo(os.path.join(os.getcwd(), 'conv.h5'))
+    p.saveModelTo(os.path.join(os.getcwd(), 'conv2.h5'))
     
 
-def func2():
+def check_conv():
     conv = ConvNeuralNetwork(None, None, 0)
     conv.loadModelFromFile(os.path.join(os.getcwd(), 'conv.h5'))
     fileName = tfd.askopenfilename()
@@ -42,7 +43,7 @@ def func2():
     print(pred)
 
 
-def func3():
+def see_first_5():
     (x_train,y_train), (x_test,y_test) = cifar10.load_data()
     # Отображение первых 25 изображений
     plt.figure(figsize=(10, 5))
@@ -54,4 +55,5 @@ def func3():
     plt.show()
 
 
-func3()
+if __name__ == '__main__':
+    train_save_conv()

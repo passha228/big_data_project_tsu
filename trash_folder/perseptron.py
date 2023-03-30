@@ -19,5 +19,5 @@ class Perseptron(NeuralNetwork):
         Dense(64, activation='relu')(x)
         Dense(32, activation='relu')(x)
 
-        Dense(outputSize, activation='softmax')(x)
-        self.model = Model(inputs, x)
+        outputs = Dense(outputSize, activation='softmax')(x)
+        self.model = Model(inputs, outputs)
