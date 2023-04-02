@@ -21,17 +21,31 @@ def train_save_conv():
     y_train = keras.utils.to_categorical(y_train, 10)
     y_test = keras.utils.to_categorical(y_test, 10)
     
-    p = ConvNeuralNetwork(optimizer = keras.optimizers.Adam(0.001), loss = "categorical_crossentropy", epochs= 3)
+    p = ConvNeuralNetwork(optimizer = keras.optimizers.Adam(0.5), loss = "categorical_crossentropy", epochs= 10)
     p.buildModel((32, 32, 3), 10)
+    #history = 
     p.compileModel(x_train, y_train)
+    #plt.plot(history['loss'])
+    #plt.plot(history['val_loss'])
+    #plt.title('conv loss')
+    #plt.ylabel('Loss')
+    #plt.xlabel('Epoch')
+    #plt.legend(['Train', 'Validation'], loc='upper left')
+    #plt.show()
     
-
-    p.saveModelTo(os.path.join(os.getcwd(), 'conv2.h5'))
+    #plt.plot(history['accuracy'])
+    #plt.plot(history['val_accuracy'])
+    #plt.title('conv accuracy')
+    #plt.ylabel('Accuracy')
+    #plt.xlabel('Epoch')
+    #plt.legend(['Train', 'Validation'], loc='upper left')
+    #plt.show()
+    p.saveModelTo(os.path.join(os.getcwd(), 'conv_v2.h5'))
     
 
 def check_conv():
     conv = ConvNeuralNetwork(None, None, 0)
-    conv.loadModelFromFile(os.path.join(os.getcwd(), 'conv.h5'))
+    conv.loadModelFromFile(os.path.join(os.getcwd(), 'conv_v2.h5'))
     fileName = tfd.askopenfilename()
     file = cv2.imread(fileName)
     img = cv2.resize(file,(32,32))
@@ -55,5 +69,4 @@ def see_first_5():
     plt.show()
 
 
-if __name__ == '__main__':
-    train_save_conv()
+func2()

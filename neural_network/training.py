@@ -101,5 +101,6 @@ if __name__ == '__main__':
         except RuntimeError as e:
             # Ошибка при конфигурации GPU
             print(e)
+    print(gpus)
     trainer = Training()
     trainer.train_save_all()
