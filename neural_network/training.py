@@ -61,7 +61,8 @@ class Training:
         print(model.summary())
 
         with tf.device('/GPU:0'):
-             model.fit(self.x_train, self.y_train, epochs = 10, batch_size = 256)
+             history = model.fit(self.x_train, self.y_train, epochs = 10, batch_size = 256)
+             print(history)
 
         # сохранение
         nn_trained_path = os.path.join(os.getcwd(), 'nn_models', model.name + '.h5')
@@ -77,7 +78,8 @@ class Training:
         print(model.summary())
 
         with tf.device('/GPU:0'):
-             model.fit(self.x_train_grayscale, self.y_train, epochs = 10, batch_size = 256)
+             history = model.fit(self.x_train_grayscale, self.y_train, epochs = 10, batch_size = 256)
+             print(history)
 
         # сохранение
         nn_trained_path = os.path.join(os.getcwd(), 'nn_models', model.name + '.h5')
