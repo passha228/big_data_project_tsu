@@ -25,6 +25,19 @@ def perseptron() ->keras.Model:
     return keras.Model(inputs = input_layer, outputs = output)
 
 
+def create_vgg16() -> keras.Model:
+    model = applications.VGG16(classes = 10, input_shape = (32, 32, 3), include_top = False, weights='imagenet')
+
+    for layer in model.layers:
+        layer.trainable = False
+
+    x = Flatten()(model.output)
+    x = Dense(32, activation = 'relu')(x)
+    x = Dense(10, activation = 'softmax')(x)
+
+    return keras.Model(inputs = model.input, outputs = x)
+
+
 # UNIT_TESTS_DONE
 def create_vgg() -> keras.Model:
     model = applications.VGG16(classes = 10, input_shape = (32, 32, 3), include_top = False)
@@ -87,9 +100,7 @@ class Training:
         
     
     def train_save_all(self):
-        self.train_save(create_vgg())
-        self.train_save(create_InceptionV3())
-        self.train_save_grayscale(perseptron())
+        self.train_save(create_vgg16())
 
 if __name__ == '__main__':
     gpus = tf.config.experimental.list_physical_devices('GPU')
