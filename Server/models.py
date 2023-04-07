@@ -31,7 +31,7 @@ class DenseNet121(NN):
 class InceptionResNetV2(NN):
     def __init__(self) -> None:
         self.model = applications.InceptionResNetV2()
-        self.input_shape = (229, 229)
+        self.input_shape = (299, 299)
 
 class VGG19(NN):
     def __init__(self) -> None:

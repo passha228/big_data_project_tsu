@@ -1,25 +1,47 @@
 import os
 from flask import Flask, flash, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
+import models
+import util
+
 path = None
 filename = None
 
-# папка для сохранения загруженных файлов
 UPLOAD_FOLDER = os.getcwd()
-# расширения файлов, которые разрешено загружать
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
-# создаем экземпляр приложения
 app = Flask(__name__)
-# конфигурируем
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/image')
 def paintpath():
     global filename
+    filename = "../static/css" + filename
     return render_template('image.html', path = filename)
 
-# Проверка расширения файла
+@app.route('/result')
+def result():
+    global filename
+    global path
+    print(path)
+    filename = "../static/css" + filename
+    modelVGG = models.VGG19()
+    modelVGG.take_image(path)
+    predict = modelVGG.predict()
+    print(predict)
+    util.take_name_of_predict(predict)
+    modelDenseNet121 = models.DenseNet121()
+    modelDenseNet121.take_image(path)
+    predict = modelDenseNet121.predict()
+    print(predict)
+    util.take_name_of_predict(predict)
+    modelInceptionResNetV2 = models.InceptionResNetV2()
+    modelInceptionResNetV2.take_image(path)
+    predict = modelInceptionResNetV2.predict()
+    print(predict)
+    util.take_name_of_predict(predict)
+    return render_template('index.html')
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -28,8 +50,6 @@ def allowed_file(filename):
 def upload_file():
     if request.method == 'POST':
         if 'file' not in request.files:
-            # После перенаправления на страницу загрузки
-            # покажем сообщение пользователю 
             flash('Не могу прочитать файл')
             return redirect(request.url)
         file = request.files['file']
@@ -41,10 +61,10 @@ def upload_file():
         if file and allowed_file(file.filename):
             global filename
             filename = secure_filename(file.filename)
+            global path
             path = os.path.join(app.config['UPLOAD_FOLDER'], 'static/css', filename)
             file.save(path)
-            filename = "../static/css/" + filename
-            return redirect(url_for('paintpath'))
+            return redirect(url_for('result'))
     return render_template('index.html')
 
 app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
