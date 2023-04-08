@@ -33,11 +33,11 @@ def result():
     modelDenseNet121.take_image(path)
     predict2 = modelDenseNet121.predict()
     predict2 = util.take_name_of_predict(predict2)
-    modelInceptionResNetV2 = models.InceptionResNetV2()
-    modelInceptionResNetV2.take_image(path)
-    predict3 = modelInceptionResNetV2.predict()
-    predict3 = util.take_name_of_predict(predict3)
-    return render_template('result.html', first = predict1, second = predict2, third = predict3)
+    #modelInceptionResNetV2 = models.InceptionResNetV2()
+    #modelInceptionResNetV2.take_image(path)
+    #predict3 = modelInceptionResNetV2.predict()
+    #predict3 = util.take_name_of_predict(predict3)
+    return render_template('result.html', first = predict1, second = predict2, third = 'popa')
 
 def allowed_file(filename):
     return '.' in filename and \
