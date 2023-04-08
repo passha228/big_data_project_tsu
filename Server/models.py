@@ -6,14 +6,10 @@ import numpy as np
 
 from PIL import Image
 import torchvision.transforms.functional as TF
-import torchvision
 
 from tensorflow.keras import applications
 
 import tkinter.filedialog as tfd
-
-#TODO DEL
-from util import take_name_of_predict
 
 class NN:
     model = None
