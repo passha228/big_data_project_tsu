@@ -51,9 +51,11 @@ def upload_file():
                 path = os.path.join(app.config['UPLOAD_FOLDER'], 'static/css', filename)
                 file.save(path)
                 return redirect(url_for('result'))
+            else:
+                return render_template('index.html', state = 'Неверный формат файла')
         return render_template('index.html')
     except RuntimeError as e:
-        return render_template('index.html')
+        return render_template('index.html', state = 'Неизвестная ошибка')
 
 
 app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
