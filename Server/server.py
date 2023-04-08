@@ -51,7 +51,7 @@ def upload_file():
                 path = os.path.join(app.config['UPLOAD_FOLDER'], 'static/css', filename)
                 file.save(path)
                 return redirect(url_for('result'))
-        return render_template('index.html', state = 'Неверный формат файла')
+        return render_template('index.html')
     except RuntimeError as e:
         return render_template('index.html')
 

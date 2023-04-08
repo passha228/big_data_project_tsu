@@ -1,0 +1,26 @@
+*
+{
+    background-color: #d6d6d6;
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+h1{
+    color: #464646;
+    margin:20px;
+}
+input{
+    color: #464646;
+    margin-left: 20px;
+}
+button{
+    font-size: larger;
+    border-radius: 15px;
+    background-color: #ffb9b9;
+}
+button:hover{
+    cursor: pointer;
+    background-color: #c58e8e;
+}
+button:active{
+    background-color: #966e6e;
+}
