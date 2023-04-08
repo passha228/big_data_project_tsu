@@ -1,8 +1,27 @@
-<!doctype html>
-    <title>Загрузить новый файл</title>
-    <h1>Загрузить новый файл</h1>
-    <form method=post enctype=multipart/form-data>
-      <input type=file name=file>
-      <input type=submit value=Upload>
-    </form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" href="{{url_for('static', filename='css/result.css')}}" rel="stylesheet" />
+  <title>Результаты</title>
+</head>
+<body>
+  <table>
+    <tr>
+      <td colspan="3">Результаты:</td>
+    </tr>
+    <tr>
+      <td>VGG19</td>
+      <td>DenseNet121</td>
+      <td>InceptionResNetV2</td>
+    </tr>
+    <tr>
+      <td>{{first}}</td>
+      <td>{{second}}</td>
+      <td>{{third}}</td>
+    </tr>
+</table>
+</body>
 </html>

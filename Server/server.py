@@ -27,20 +27,17 @@ def result():
     filename = "../static/css" + filename
     modelVGG = models.VGG19()
     modelVGG.take_image(path)
-    predict = modelVGG.predict()
-    print(predict)
-    util.take_name_of_predict(predict)
+    predict1 = modelVGG.predict()
+    predict1 = util.take_name_of_predict(predict1)
     modelDenseNet121 = models.DenseNet121()
     modelDenseNet121.take_image(path)
-    predict = modelDenseNet121.predict()
-    print(predict)
-    util.take_name_of_predict(predict)
+    predict2 = modelDenseNet121.predict()
+    predict2 = util.take_name_of_predict(predict2)
     modelInceptionResNetV2 = models.InceptionResNetV2()
     modelInceptionResNetV2.take_image(path)
-    predict = modelInceptionResNetV2.predict()
-    print(predict)
-    util.take_name_of_predict(predict)
-    return render_template('index.html')
+    predict3 = modelInceptionResNetV2.predict()
+    predict3 = util.take_name_of_predict(predict3)
+    return render_template('result.html', first = predict1, second = predict2, third = predict3)
 
 def allowed_file(filename):
     return '.' in filename and \
