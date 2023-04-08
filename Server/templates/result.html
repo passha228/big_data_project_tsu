@@ -13,14 +13,14 @@
       <td colspan="3">Результаты:</td>
     </tr>
     <tr>
-      <td>VGG19</td>
-      <td>DenseNet121</td>
-      <td>InceptionResNetV2</td>
+      {% for i in data %}
+        <td>{{i[0]}}</td>
+      {% endfor %}
     </tr>
     <tr>
-      <td>{{first}}</td>
-      <td>{{second}}</td>
-      <td></td>
+      {% for i in data %}
+        <td>{{i[1]}}</td>
+      {% endfor %}
     </tr>
 </table>
 </body>

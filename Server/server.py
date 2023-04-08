@@ -20,16 +20,15 @@ def result():
     global filename
     global path
     print(path)
+    predicts = []
     filename = "../static/css" + filename
     modelVGG = VGG19()
     modelVGG.take_image(path)
-    predict1 = modelVGG.predict()
-    predict1 = util.take_name_of_predict(predict1)
+    predicts.append((modelVGG.getName(), util.take_name_of_predict(modelVGG.predict())))
     modelDenseNet121 = DenseNet121()
     modelDenseNet121.take_image(path)
-    predict2 = modelDenseNet121.predict()
-    predict2 = util.take_name_of_predict(predict2)
-    return render_template('result.html', first = predict1, second = predict2)
+    predicts.append((modelDenseNet121.getName(), util.take_name_of_predict(modelDenseNet121.predict())))
+    return render_template('result.html', data = predicts)
 
 def allowed_file(filename):
     return '.' in filename and \
