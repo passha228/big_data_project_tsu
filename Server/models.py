@@ -55,7 +55,3 @@ class VGG19(NN):
     def __init__(self) -> None:
         self.model = applications.VGG19()
         self.input_shape = (224, 224)
-
-a = AlexNet()
-a.take_image('C:/Users/pasha228/Desktop/8.jpg')
-a.predict()
