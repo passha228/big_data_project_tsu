@@ -1,15 +1,9 @@
 import tensorflow as tf
 import keras
-import torch
 import cv2
 import numpy as np
 
-from PIL import Image
-import torchvision.transforms.functional as TF
-
 from tensorflow.keras import applications
-
-import tkinter.filedialog as tfd
 
 class NN:
     model = None
@@ -30,22 +24,6 @@ class DenseNet121(NN):
     def __init__(self) -> None:
         self.model = applications.DenseNet121()
         self.input_shape = (224, 224)
-
-class AlexNet:
-    def __init__(self):
-        self.model = torch.hub.load('pytorch/vision:v0.10.0', 'alexnet', pretrained=True)
-
-    def take_image(self, img_path: str):
-        image = Image.open(img_path)
-        image = image.resize([224, 224])
-
-        self.image = TF.to_tensor(image)
-        self.image.unsqueeze_(0)
-
-    def predict(self):
-        output = self.model(self.image)
-        max_arg = torch.argmax(output)
-        return max_arg.item()
 
 class VGG19(NN):
     def __init__(self) -> None:
