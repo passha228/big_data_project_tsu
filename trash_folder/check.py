@@ -38,4 +38,4 @@ model.compile(optimizer = keras.optimizers.Adam(0.1), loss = 'categorical_crosse
 model.fit(x_train, y_train, epochs = 10)
 print(model.evaluate(x_test, y_test))
 
-model.save(os.path.join(os.getcwd(), 'dick.h5'))
+model.save(os.path.join(os.getcwd(), 'some.h5'))
