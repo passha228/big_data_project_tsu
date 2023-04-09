@@ -23,7 +23,7 @@ class NN:
         self.img = np.expand_dims(self.img, axis=0)
 
     def getName(self):
-        return self.name;
+        return self.name
     
 class DenseNet121(NN):
     def __init__(self) -> None:
