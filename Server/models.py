@@ -2,6 +2,7 @@ import tensorflow as tf
 import keras
 import cv2
 import numpy as np
+import util
 
 from tensorflow.keras import applications
 
@@ -36,3 +37,14 @@ class VGG19(NN):
         self.model = applications.VGG19()
         self.input_shape = (224, 224)
         self.name = 'VGG19'
+
+
+def getResults(path):
+    predicts = []
+    modelVGG = VGG19()
+    modelVGG.take_image(path)
+    predicts.append((modelVGG.getName(), util.take_name_of_predict(modelVGG.predict())))
+    modelDenseNet121 = DenseNet121()
+    modelDenseNet121.take_image(path)
+    predicts.append((modelDenseNet121.getName(), util.take_name_of_predict(modelDenseNet121.predict())))
+    return predicts

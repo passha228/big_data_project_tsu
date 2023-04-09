@@ -1,13 +1,9 @@
 import os
 from flask import Flask, flash, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
-from models import VGG19
-from models import DenseNet121
-import util
-
+from models import getResults
 
 path = None
-filename = None
 
 UPLOAD_FOLDER = os.getcwd()
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
@@ -17,18 +13,8 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/result')
 def result():
-    global filename
     global path
-    print(path)
-    predicts = []
-    filename = "../static/css" + filename
-    modelVGG = VGG19()
-    modelVGG.take_image(path)
-    predicts.append((modelVGG.getName(), util.take_name_of_predict(modelVGG.predict())))
-    modelDenseNet121 = DenseNet121()
-    modelDenseNet121.take_image(path)
-    predicts.append((modelDenseNet121.getName(), util.take_name_of_predict(modelDenseNet121.predict())))
-    return render_template('result.html', data = predicts)
+    return render_template('result.html', data = getResults(path))
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -44,7 +30,6 @@ def upload_file():
             if file.filename == '':
                 return render_template('index.html', state = 'Нет выбранного файла')
             if file and allowed_file(file.filename):
-                global filename
                 filename = secure_filename(file.filename)
                 global path
                 path = os.path.join(app.config['UPLOAD_FOLDER'], 'static/css', filename)
