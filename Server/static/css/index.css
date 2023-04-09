@@ -24,3 +24,8 @@ button:hover{
 button:active{
     background-color: #966e6e;
 }
+
+h3 {
+    padding-left: 20px;
+    padding-top: 10px;
+}
