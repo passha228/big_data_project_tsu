@@ -25,8 +25,8 @@ def perseptron() ->keras.Model:
     return keras.Model(inputs = input_layer, outputs = output)
 
 
-def create_vgg16() -> keras.Model:
-    model = applications.VGG16(classes = 10, input_shape = (32, 32, 3), include_top = False, weights='imagenet')
+def create_vgg19() -> keras.Model:
+    model = applications.VGG19(classes = 10, input_shape = (32, 32, 3), include_top = False, weights='imagenet')
 
     for layer in model.layers:
         layer.trainable = False
@@ -100,7 +100,7 @@ class Training:
         
     
     def train_save_all(self):
-        self.train_save(create_vgg16())
+        self.train_save(create_vgg19())
 
 if __name__ == '__main__':
     gpus = tf.config.experimental.list_physical_devices('GPU')
